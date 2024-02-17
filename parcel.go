@@ -25,7 +25,6 @@ func (s ParcelStore) Add(p Parcel) (int, error) {
 		return 0, fmt.Errorf("db.Exec: %w", err)
 	}
 
-	// верните идентификатор последней добавленной записи
 	id, err := res.LastInsertId()
 
 	if err != nil {
@@ -48,8 +47,7 @@ func (s ParcelStore) Get(number int) (Parcel, error) {
 }
 
 func (s ParcelStore) GetByClient(client int) ([]Parcel, error) {
-	// реализуйте чтение строк из таблицы parcel по заданному client
-	// здесь из таблицы может вернуться несколько строк
+
 	query := "SELECT number, client, status, address, created_at FROM parcel WHERE client = ?"
 
 	rows, err := s.db.Query(query, client)
@@ -57,7 +55,6 @@ func (s ParcelStore) GetByClient(client int) ([]Parcel, error) {
 		return nil, fmt.Errorf("s.db.Query: %w", err)
 	}
 	defer rows.Close()
-	// заполните срез Parcel данными из таблицы
 	var res []Parcel
 
 	for rows.Next() {
@@ -77,7 +74,6 @@ func (s ParcelStore) GetByClient(client int) ([]Parcel, error) {
 }
 
 func (s ParcelStore) SetStatus(number int, status string) error {
-	// реализуйте обновление статуса в таблице parcel
 	query := "UPDATE parcel set status = ? WHERE number = ?"
 	if _, err := s.db.Exec(query, status, number); err != nil {
 		return fmt.Errorf("s.db.Exec: %w", err)
@@ -87,8 +83,7 @@ func (s ParcelStore) SetStatus(number int, status string) error {
 }
 
 func (s ParcelStore) SetAddress(number int, address string) error {
-	// реализуйте обновление адреса в таблице parcel
-	// менять адрес можно только если значение статуса registered
+
 	query := "UPDATE parcel set address = ? WHERE number = ? AND status = ?"
 	if _, err := s.db.Exec(query, address, number, ParcelStatusRegistered); err != nil {
 		return fmt.Errorf("s.db.Exec: %w", err)
@@ -98,8 +93,7 @@ func (s ParcelStore) SetAddress(number int, address string) error {
 }
 
 func (s ParcelStore) Delete(number int) error {
-	// реализуйте удаление строки из таблицы parcel
-	// удалять строку можно только если значение статуса registered
+
 	query := "DELETE FROM parcel where number = ? and status = ?"
 	if _, err := s.db.Exec(query, number, ParcelStatusRegistered); err != nil {
 		return fmt.Errorf("s.db.Exec: %w", err)
