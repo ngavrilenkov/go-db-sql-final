@@ -88,7 +88,7 @@ func TestSetAddress(t *testing.T) {
 	// получите добавленную посылку и убедитесь, что адрес обновился
 	p, err := store.Get(n)
 	require.NoError(t, err)
-	assert.Equal(t, p.Address, newAddress)
+	assert.Equal(t, newAddress, p.Address)
 }
 
 // TestSetStatus проверяет обновление статуса
