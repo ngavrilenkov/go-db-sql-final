@@ -27,6 +27,7 @@ func (s ParcelStore) Add(p Parcel) (int, error) {
 
 	// верните идентификатор последней добавленной записи
 	id, err := res.LastInsertId()
+
 	if err != nil {
 		return 0, fmt.Errorf("res.LastInsertId: %w", err)
 	}

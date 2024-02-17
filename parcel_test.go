@@ -22,7 +22,6 @@ var (
 // getTestParcel возвращает тестовую посылку
 func getTestParcel() Parcel {
 	return Parcel{
-		Number:    20,
 		Client:    1000,
 		Status:    ParcelStatusRegistered,
 		Address:   "test",
@@ -52,9 +51,9 @@ func TestAddGetDelete(t *testing.T) {
 	// get
 	// получите только что добавленную посылку, убедитесь в отсутствии ошибки
 	// проверьте, что значения всех полей в полученном объекте совпадают со значениями полей в переменной parcel
-	p, err := store.Get(parcel.Number)
+	p, err := store.Get(n)
 	if assert.NoError(t, err) {
-		require.Equal(t, p.Number, parcel.Number)
+		require.Equal(t, p.Number, n)
 	}
 
 	// delete
@@ -93,14 +92,14 @@ func TestSetAddress(t *testing.T) {
 	// set address
 	// обновите адрес, убедитесь в отсутствии ошибки
 	newAddress := "new test address"
-	err = store.SetAddress(parcel.Number, newAddress)
+	err = store.SetAddress(n, newAddress)
 	if err != nil {
 		require.NoError(t, err)
 	}
 
 	// check
 	// получите добавленную посылку и убедитесь, что адрес обновился
-	p, err := store.Get(parcel.Number)
+	p, err := store.Get(n)
 	if assert.NoError(t, err) {
 		assert.Equal(t, p.Address, newAddress)
 	}
