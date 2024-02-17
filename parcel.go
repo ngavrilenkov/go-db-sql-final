@@ -89,8 +89,8 @@ func (s ParcelStore) SetStatus(number int, status string) error {
 func (s ParcelStore) SetAddress(number int, address string) error {
 	// реализуйте обновление адреса в таблице parcel
 	// менять адрес можно только если значение статуса registered
-	query := "UPDATE parcel set address = ? WHERE number = ? AND status = 'registered'"
-	if _, err := s.db.Exec(query, address, number); err != nil {
+	query := "UPDATE parcel set address = ? WHERE number = ? AND status = ?"
+	if _, err := s.db.Exec(query, address, number, ParcelStatusRegistered); err != nil {
 		return fmt.Errorf("s.db.Exec: %w", err)
 	}
 
