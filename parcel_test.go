@@ -42,9 +42,7 @@ func TestAddGetDelete(t *testing.T) {
 	// add
 	// добавьте новую посылку в БД, убедитесь в отсутствии ошибки и наличии идентификатора
 	n, err := store.Add(parcel)
-	if assert.NoError(t, err) {
-		require.GreaterOrEqual(t, n, 0)
-	}
+	require.NoError(t, err)
 
 	// get
 	// получите только что добавленную посылку, убедитесь в отсутствии ошибки
@@ -79,9 +77,7 @@ func TestSetAddress(t *testing.T) {
 	// add
 	// добавьте новую посылку в БД, убедитесь в отсутствии ошибки и наличии идентификатора
 	n, err := store.Add(parcel)
-	if assert.NoError(t, err) {
-		require.GreaterOrEqual(t, n, 0)
-	}
+	require.NoError(t, err)
 
 	// set address
 	// обновите адрес, убедитесь в отсутствии ошибки
@@ -94,9 +90,8 @@ func TestSetAddress(t *testing.T) {
 	// check
 	// получите добавленную посылку и убедитесь, что адрес обновился
 	p, err := store.Get(n)
-	if assert.NoError(t, err) {
-		assert.Equal(t, p.Address, newAddress)
-	}
+	require.NoError(t, err)
+	assert.Equal(t, p.Address, newAddress)
 }
 
 // TestSetStatus проверяет обновление статуса
@@ -112,9 +107,7 @@ func TestSetStatus(t *testing.T) {
 	// add
 	// добавьте новую посылку в БД, убедитесь в отсутствии ошибки и наличии идентификатора
 	n, err := store.Add(parcel)
-	if assert.NoError(t, err) {
-		require.GreaterOrEqual(t, n, 0)
-	}
+	require.NoError(t, err)
 
 	// set status
 	// обновите статус, убедитесь в отсутствии ошибки
