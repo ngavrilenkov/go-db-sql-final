@@ -118,7 +118,7 @@ func TestSetStatus(t *testing.T) {
 	// получите добавленную посылку и убедитесь, что статус обновился
 	p, err := store.Get(n)
 	if assert.NoError(t, err) {
-		assert.Equal(t, p.Status, testStatus)
+		assert.Equal(t, testStatus, p.Status)
 	}
 }
 
