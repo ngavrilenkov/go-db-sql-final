@@ -94,9 +94,8 @@ func TestSetStatus(t *testing.T) {
 	require.NoError(t, err)
 
 	p, err := store.Get(n)
-	if assert.NoError(t, err) {
-		assert.Equal(t, testStatus, p.Status)
-	}
+	require.NoError(t, err)
+	require.Equal(t, testStatus, p.Status)
 }
 
 // TestGetByClient проверяет получение посылок по идентификатору клиента
