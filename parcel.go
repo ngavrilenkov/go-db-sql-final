@@ -14,9 +14,10 @@ func NewParcelStore(db *sql.DB) ParcelStore {
 }
 
 func (s ParcelStore) Add(p Parcel) (int, error) {
-	query := "INSERT INTO parcel (client, status, address, created_at) VALUES (:client, :status, :address, :created_at)"
+	query := "INSERT INTO parcel (number, client, status, address, created_at) VALUES (:number, :client, :status, :address, :created_at)"
 
 	res, err := s.db.Exec(query,
+		sql.Named("number", p.Number),
 		sql.Named("client", p.Client),
 		sql.Named("status", p.Status),
 		sql.Named("address", p.Address),
