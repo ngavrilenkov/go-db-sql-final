@@ -121,9 +121,8 @@ func TestGetByClient(t *testing.T) {
 
 	for i := 0; i < len(parcels); i++ {
 		id, err := store.Add(parcels[i])
-		if assert.NoError(t, err) {
-			require.GreaterOrEqual(t, id, 0)
-		}
+		assert.NoError(t, err)
+		require.GreaterOrEqual(t, id, 0)
 
 		parcels[i].Number = id
 
