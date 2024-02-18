@@ -68,9 +68,7 @@ func TestSetAddress(t *testing.T) {
 
 	newAddress := "new test address"
 	err = store.SetAddress(n, newAddress)
-	if err != nil {
-		require.NoError(t, err)
-	}
+	require.NoError(t, err)
 
 	p, err := store.Get(n)
 	require.NoError(t, err)
@@ -92,9 +90,7 @@ func TestSetStatus(t *testing.T) {
 
 	testStatus := ParcelStatusSent
 	err = store.SetStatus(n, testStatus)
-	if err != nil {
-		require.NoError(t, err)
-	}
+	require.NoError(t, err)
 
 	p, err := store.Get(n)
 	if assert.NoError(t, err) {
