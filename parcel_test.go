@@ -41,6 +41,7 @@ func TestAddGetDelete(t *testing.T) {
 
 	n, err := store.Add(parcel)
 	require.NoError(t, err)
+	require.NotEmpty(t, n)
 
 	p, err := store.Get(n)
 	require.NoError(t, err)
