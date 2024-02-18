@@ -43,6 +43,8 @@ func TestAddGetDelete(t *testing.T) {
 	require.NoError(t, err)
 	require.NotEmpty(t, n)
 
+	// Нельзя сравнивать структуры, так как номер будет отличаться,
+	// потому что он генерируется в момент добавления
 	p, err := store.Get(n)
 	require.NoError(t, err)
 	require.Equal(t, p.Number, n)
