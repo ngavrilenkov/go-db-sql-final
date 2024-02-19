@@ -22,7 +22,6 @@ var (
 // getTestParcel возвращает тестовую посылку
 func getTestParcel() Parcel {
 	return Parcel{
-		Number:    randRange.Intn(10_000_000),
 		Client:    1000,
 		Status:    ParcelStatusRegistered,
 		Address:   "test",
@@ -44,9 +43,11 @@ func TestAddGetDelete(t *testing.T) {
 	require.NoError(t, err)
 	require.NotEmpty(t, n)
 
+	parcel.Number = n
+
 	p, err := store.Get(n)
 	require.NoError(t, err)
-	require.Equal(t, p, parcel)
+	require.Equal(t, parcel, p)
 
 	err = store.Delete(n)
 	require.NoError(t, err)
